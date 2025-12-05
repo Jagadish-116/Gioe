@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIOE Portal - Government Institute of Electronics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Custom CSS Variables for Easy Theming */
+        :root {
+            --color-dark-bg: #0d1117; /* Very Dark Blue/Black */
+            --color-primary-bg: #161b22; /* Slightly Lighter Dark Background */
+            --color-accent: #00e0ff; /* Neon Blue */
+            --color-accent-hover: #00aaff;
+            --color-text-light: #e6edf3; /* Light Gray for main text */
+            --color-text-muted: #8b949e; /* Muted Gray */
+            --color-card-bg: #1f2730; /* Card Background */
+            --color-border: #30363d;
+            --font-heading: 'Orbitron', sans-serif; /* Tech/Sci-Fi font */
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        /* Base Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-dark-bg);
+            color: var(--color-text-light);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent-hover);
+        }
+
+        /* --- Utility Classes --- */
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Header & Navigation --- */
+        .navbar {
+            background-color: var(--color-primary-bg);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .navbar-logo {
+            font-family: var(--font-heading);
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--color-text-light);
+            letter-spacing: 1px;
+        }
+
+        .logo-spark {
+            color: var(--color-accent);
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { color: var(--color-accent) }
+        }
+
+        .navbar-menu {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar-menu li {
+            margin-left: 30px;
+        }
+
+        .navbar-menu a {
+            color: var(--color-text-light);
+            font-weight: 400;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-menu a:hover,
+        .navbar-menu a.active {
+            color: var(--color-accent);
+        }
+
+        .navbar-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .navbar-menu a.active::after,
+        .navbar-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Setup */
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        /* Burger menu animation for the X icon */
+        .burger-menu.active .burger-line:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .burger-menu.active .burger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.active .burger-line:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color-accent);
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu {
+            display: none;
+            background-color: var(--color-primary-bg);
+            position: absolute;
+            top: 60px; /* Adjust based on navbar height */
+            left: 0;
+            right: 0;
+            padding: 20px;
+            border-bottom: 2px solid var(--color-accent);
+            z-index: 999;
+            flex-direction: column;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: var(--color-text-light);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 1.1em;
+            display: block;
+        }
+        
+        .mobile-menu a i {
+            margin-right: 10px;
+            color: var(--color-accent);
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+            color: var(--color-accent);
+            background-color: rgba(0, 224, 255, 0.05);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            background-color: var(--color-primary-bg);
+            padding: 100px 20px;
+            text-align: center;
+            overflow: hidden;
+            border-bottom: 5px solid var(--color-accent);
+        }
+
+        .hero-bg-overlay {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Subtle geometric pattern for a tech feel */
+            background-image: radial-gradient(var(--color-border) 1px, transparent 0);
+            background-size: 40px 40px;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: var(--color-accent);
+            text-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: var(--color-text-muted);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-dark-bg);
+            border-color: var(--color-accent);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-accent-hover);
+            box-shadow: 0 0 15px var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(0, 224, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 224, 255, 0.5) inset;
+            transform: translateY(-2px);
+        }
+
+        /* --- Content Modules --- */
+        .page-title-header {
+            text-align: center;
+            padding: 50px 0 30px;
+            margin-bottom: 20px;
+        }
+
+        .page-title-header h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5em;
+            color: var(--color-text-light);
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .page-title-header h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-accent);
+            margin: 10px auto 0;
+        }
+
+        .page-title-header p {
+            color: var(--color-text-muted);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding-bottom: 50px;
+        }
+
+        .card {
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-top: 5px solid var(--color-accent);
+            padding: 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 224, 255, 0.15);
+            border-color: var(--color-accent);
+        }
+
+        .card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5em;
+            color: var(--color-accent);
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--color-text-light);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            font-family: var(--font-heading);
+            color: var(--color-text-muted);
+            font-size: 0.9em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card:hover .card-meta {
+            color: var(--color-accent);
+        }
+        
+        .card-meta i {
+            margin-left: 5px;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--color-primary-bg);
+            padding: 50px 20px 20px;
+            border-top: 2px solid var(--color-border);
+            font-size: 0.9em;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            font-family: var(--font-heading);
+            font-size: 1.1em;
+            color: var(--color-accent);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section a,
+        .footer-section p {
+            display: block;
+            color: var(--color-text-muted);
+            margin-bottom: 8px;
+        }
+
+        .footer-section a:hover {
+            color: var(--color-text-light);
+            transform: translateX(5px);
+        }
+
+        .footer-section i {
+            margin-right: 8px;
+            color: var(--color-accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+        }
+
+        .text-glow {
+            color: var(--color-accent);
+            text-shadow: 0 0 5px rgba(0, 224, 255, 0.8);
+            font-weight: 700;
+        }
+
+
+        /* --- Responsive Design --- */
+        @media (max-width: 950px) {
+            .navbar-menu {
+                display: none;
+            }
+
+            .burger-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .hero {
+                padding: 70px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 80%;
+                margin: 0 auto;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    </head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar-logo">GIOE Portal<span class="logo-spark">_</span></a>
+        <ul class="navbar-menu">
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="question-papers.html"><i class="fas fa-file-alt"></i> Papers</a></li>
+            <li><a href="notes.html"><i class="fas fa-book"></i> Notes</a></li>
+            <li><a href="free-courses.html"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+            <li><a href="job-openings.html"><i class="fas fa-briefcase"></i> Jobs</a></li>
+            <li><a href="https://ecetrix.netlify.app"><i class="fas fa-rocket"></i> ECETRIX</a></li>
+        </ul>
+        <div class="burger-menu" id="burgerMenu">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </nav>
+    
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+        <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+        <a href="question-papers.html"><i class="fas fa-file-alt"></i> Question Papers</a>
+        <a href="notes.html"><i class="fas fa-book"></i> Notes</a>
+        <a href="free-courses.html"><i class="fas fa-graduation-cap"></i> Free Courses</a>
+        <a href="job-openings.html"><i class="fas fa-briefcase"></i> Job Openings</a>
+        <a href="https://ecetrix.netlify.app"><i class="fas fa-rocket"></i> ECETRIX</a>
+        <a href="studybuddy.html"><i class="fas fa-brain"></i> StudyBuddy AI</a>
+        <a href="interview-prep.html"><i class="fas fa-clipboard-list"></i> Interview Prep</a>
+        <a href="https://cv-generator-v1.netlify.app/"><i class="fas fa-file-invoice"></i> CV Generator</a>
+    </div>
+
+    <section class="hero">
+        <div class="hero-bg-overlay"></div>
+        <h1>Empowering the Next Generation of Engineers</h1>
+        <p>Your official gateway to academic resources, career advancement, and interactive learning tools from the Government Institute of Electronics.</p>
+        <div class="hero-actions">
+            <a href="free-courses.html" class="btn btn-primary"><i class="fas fa-play-circle"></i> Start Learning Today</a>
+            <a href="job-openings.html" class="btn btn-secondary"><i class="fas fa-search"></i> View Latest Jobs</a>
+        </div>
+    </section>
+
+    <main class="content-section">
+        <div class="page-title-header">
+            <h2>Core Portal Modules</h2>
+            <p>Access essential resources designed to support your academic and professional journey.</p>
+        </div>
+        
+        <div class="card-grid">
+            <a href="question-papers.html" class="card">
+                <h3>Question Papers 📚</h3>
+                <p>Download and practice with previous year's examination papers organized by branch and semester.</p>
+                <div class="card-meta">Access Past Exams <i class="fas fa-arrow-right"></i></div>
+            </a>
+            
+            <a href="studybuddy.html" class="card">
+                <h3>StudyBuddy AI 🧠</h3>
+                <p>An intelligent assistant powered by GIOE knowledge base for instant doubts clarification and summary generation.</p>
+                <div class="card-meta">Ask a Question <i class="fas fa-arrow-right"></i></div>
+            </a>
+            
+            <a href="job-openings.html" class="card">
+                <h3>Job Openings 💼</h3>
+                <p>Curated list of career opportunities, internships, and placement drives relevant to GIOE students and alumni.</p>
+                <div class="card-meta">Find Your Career <i class="fas fa-arrow-right"></i></div>
+            </a>
+            
+            <a href="https://ecetrix.netlify.app" class="card">
+                <h3>ECETRIX: Mock Test System ⏱️</h3>
+                <p>Simulate real exams with timed mock tests, personalized results, and detailed performance analytics.</p>
+                <div class="card-meta">Start a Mock Test <i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <a href="interview-prep.html" class="card">
+                <h3>Interview Prep 🎯</h3>
+                <p>Comprehensive technical guides, HR Q&A scripts, and aptitude practice material to ace your interviews.</p>
+                <div class="card-meta">Prepare to Succeed <i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <a href="https://cv-generator-v1.netlify.app/" class="card">
+                <h3>CV Generator 📄</h3>
+                <p>Build a professional, industry-standard CV quickly and easily using GIOE-approved templates.</p>
+                <div class="card-meta">Create Your CV <i class="fas fa-arrow-right"></i></div>
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About GIOE</h4>
+                <p>Committed to excellence in Electronics and Technology education. Fostering a new era of innovation.</p>
+                <p>Est. 1998</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="question-papers.html">Exam Papers</a>
+                <a href="notes.html">Lecture Notes</a>
+                <a href="free-courses.html">Online Courses</a>
+                <a href="job-openings.html">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="https://ecetrix.netlify.app">ECET Preparation</a>
+                <a href="studybuddy.html">AI Study Tool</a>
+                <a href="interview-prep.html">Interview Guides</a>
+            </div>
+             <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fas fa-envelope"></i> contact@gioe.edu</p>
+                <p><i class="fas fa-phone"></i> +91 1234 567 890</p>
+                <p><i class="fas fa-map-marker-alt"></i> Main Campus, Sector 12</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 GIOE Portal. <span class="text-glow">Code. Connect. Conquer.</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burgerMenu = document.getElementById('burgerMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            // Function to toggle the mobile menu and the burger icon
+            burgerMenu.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+                // Toggle active class for the burger menu icon animation
+                burgerMenu.classList.toggle('active'); 
+            });
+
+            // Close mobile menu when a link is clicked 
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    burgerMenu.classList.remove('active');
+                });
+            });
+        });
+    </script>
+    </body>
+</html>

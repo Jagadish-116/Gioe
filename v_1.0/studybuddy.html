@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyBuddy AI - GIOE Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Custom CSS Variables for Easy Theming (Cyber Dark Theme) */
+        :root {
+            --color-dark-bg: #0d1117; /* Very Dark Blue/Black */
+            --color-primary-bg: #161b22; /* Slightly Lighter Dark Background */
+            --color-accent: #00e0ff; /* Neon Blue */
+            --color-secondary: #ff7f00; /* Cyber Orange for differentiation */
+            --color-accent-hover: #00aaff;
+            --color-text-light: #e6edf3; /* Light Gray for main text */
+            --color-text-muted: #8b949e; /* Muted Gray */
+            --color-card-bg: #1f2730; /* Card Background */
+            --color-border: #30363d;
+            --font-heading: 'Orbitron', sans-serif; /* Tech/Sci-Fi font */
+            --font-body: 'Roboto', sans-serif;
+
+            /* Chat Specific Colors */
+            --color-chat-buddy: var(--color-card-bg); /* Darker bubble for AI */
+            --color-chat-user: #0088aa; /* Darker Cyan for user bubble */
+        }
+
+        /* Base Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-dark-bg);
+            color: var(--color-text-light);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent-hover);
+        }
+
+        /* --- Utility Classes --- */
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-dark-bg);
+            border-color: var(--color-accent);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-accent-hover);
+            box-shadow: 0 0 15px var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        /* --- Header & Navigation --- */
+        .navbar {
+            background-color: var(--color-primary-bg);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .navbar-logo {
+            font-family: var(--font-heading);
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--color-text-light);
+            letter-spacing: 1px;
+        }
+        
+        .navbar-logo::after {
+            content: '_';
+            color: var(--color-accent);
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { color: transparent }
+            50% { color: var(--color-accent) }
+        }
+
+        .navbar-menu {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar-menu li {
+            margin-left: 30px;
+        }
+
+        .navbar-menu a {
+            color: var(--color-text-light);
+            font-weight: 400;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+            display: flex; 
+            align-items: center;
+        }
+        
+        .navbar-menu a i {
+             margin-right: 8px;
+        }
+
+
+        .navbar-menu a:hover,
+        .navbar-menu a.active {
+            color: var(--color-accent);
+        }
+
+        .navbar-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .navbar-menu a.active::after,
+        .navbar-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Setup */
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color-accent);
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu {
+            display: none;
+            background-color: var(--color-primary-bg);
+            position: absolute;
+            top: 60px; 
+            left: 0;
+            right: 0;
+            padding: 20px;
+            border-bottom: 2px solid var(--color-accent);
+            z-index: 999;
+            flex-direction: column;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: var(--color-text-light);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 1.1em;
+            display: block;
+        }
+        
+        .mobile-menu a i {
+            margin-right: 10px;
+            color: var(--color-accent);
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+            color: var(--color-accent);
+            background-color: rgba(0, 224, 255, 0.05);
+        }
+
+
+        /* --- Page Title Header --- */
+        .page-title-header {
+            text-align: center;
+            padding: 50px 0 30px;
+            margin-bottom: 20px;
+        }
+
+        .page-title-header h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5em;
+            color: var(--color-text-light);
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .page-title-header h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-accent);
+            margin: 10px auto 0;
+        }
+
+        .page-title-header p {
+            color: var(--color-text-muted);
+        }
+        
+        /* --- STUDYBUDDY AI CHAT STYLES --- */
+        
+        #studybuddy-page {
+            padding: 20px 0;
+        }
+
+        .chat-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 75vh; /* Increased height for better visibility */
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--color-primary-bg);
+            box-shadow: 0 0 30px rgba(0, 224, 255, 0.15); /* Neon glow effect */
+        }
+
+        /* Chat Sidebar */
+        .chat-sidebar {
+            background-color: var(--color-card-bg);
+            padding: 20px;
+            border-right: 1px solid var(--color-border);
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .chat-sidebar h4 {
+            font-family: var(--font-heading);
+            color: var(--color-secondary); /* Use orange for high emphasis on side titles */
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            border-bottom: 1px dashed var(--color-border);
+            padding-bottom: 8px;
+        }
+
+        .topic-list a {
+            display: block;
+            padding: 8px 5px;
+            color: var(--color-text-muted);
+            font-size: 0.95em;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .topic-list a:hover {
+            background-color: rgba(0, 224, 255, 0.05);
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+        
+        /* Chat Box & Messages */
+        .chat-box {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            padding: 15px 20px;
+            border-radius: 18px;
+            max-width: 85%;
+            line-height: 1.5;
+            font-size: 0.95em;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+        }
+
+        .buddy {
+            background-color: var(--color-chat-buddy);
+            border: 1px solid var(--color-accent);
+            align-self: flex-start;
+            border-top-left-radius: 4px;
+            color: var(--color-text-light);
+        }
+        
+        /* Highlight bold text in buddy messages */
+        .buddy strong {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        .user {
+            background-color: var(--color-chat-user);
+            color: var(--color-text-light);
+            align-self: flex-end;
+            margin-left: auto;
+            border-top-right-radius: 4px;
+        }
+
+        /* Chat Input Area */
+        .chat-input-area {
+            display: flex;
+            padding: 15px 20px;
+            border-top: 1px solid var(--color-border);
+            gap: 10px;
+            background-color: var(--color-card-bg);
+        }
+
+        #chatInput {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 1em;
+            background-color: var(--color-primary-bg);
+            color: var(--color-text-light);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        #chatInput::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        #chatInput:focus {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+        }
+
+        .chat-send-btn {
+            padding: 10px 25px;
+            border-radius: 8px;
+            min-width: 100px;
+        }
+        
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--color-primary-bg);
+            padding: 50px 20px 20px;
+            border-top: 2px solid var(--color-border);
+            font-size: 0.9em;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            font-family: var(--font-heading);
+            font-size: 1.1em;
+            color: var(--color-accent);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section a,
+        .footer-section p {
+            display: block;
+            color: var(--color-text-muted);
+            margin-bottom: 8px;
+        }
+
+        .footer-section a:hover {
+            color: var(--color-text-light);
+            transform: translateX(5px);
+        }
+        
+        /* Adding icons to contact p tags in footer */
+        .footer-section p:nth-child(2)::before {
+            content: "\f0e0"; 
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            margin-right: 8px;
+            color: var(--color-accent);
+        }
+        
+        .footer-section p:nth-child(3)::before {
+            content: "\f095"; 
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            margin-right: 8px;
+            color: var(--color-accent);
+        }
+        
+        .footer-section p:nth-child(4)::before {
+            content: "\f3c5"; 
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            margin-right: 8px;
+            color: var(--color-accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .navbar-menu {
+                display: none;
+            }
+
+            .burger-menu {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .chat-container {
+                grid-template-columns: 1fr;
+                height: 85vh;
+                border-left: none;
+                border-right: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .chat-sidebar {
+                display: none; /* Hide sidebar on small screens */
+            }
+
+            .chat-messages {
+                padding: 10px;
+            }
+
+            .message {
+                max-width: 95%;
+            }
+            
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar-logo">GIOE Portal</a>
+        <ul class="navbar-menu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="question-papers.html"><i class="fas fa-file-alt"></i> Papers</a></li>
+            <li><a href="notes.html"><i class="fas fa-book"></i> Notes</a></li>
+            <li><a href="free-courses.html"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+            <li><a href="job-openings.html"><i class="fas fa-briefcase"></i> Jobs</a></li>
+            <li><a href="https://ecetrix.netlify.app"><i class="fas fa-rocket"></i> ECETRIX</a></li>
+            <li><a href="studybuddy.html" class="active"><i class="fas fa-brain"></i> StudyBuddy AI</a></li> </ul>
+        <div class="burger-menu" id="burgerMenu">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
+        <a href="question-papers.html"><i class="fas fa-file-alt"></i> Question Papers</a>
+        <a href="notes.html"><i class="fas fa-book"></i> Notes</a>
+        <a href="free-courses.html"><i class="fas fa-graduation-cap"></i> Free Courses</a>
+        <a href="job-openings.html"><i class="fas fa-briefcase"></i> Job Openings</a>
+        <a href="https://ecetrix.netlify.app"><i class="fas fa-rocket"></i> ECETRIX</a>
+        <a href="studybuddy.html" class="active"><i class="fas fa-brain"></i> StudyBuddy AI</a>
+        <a href="interview-prep.html"><i class="fas fa-clipboard-list"></i> Interview Prep</a>
+        <a href="https://cv-generator-v1.netlify.app/"><i class="fas fa-file-invoice"></i> CV Generator</a>
+    </div>
+
+    <main class="content-section" id="studybuddy-page">
+        <div class="page-title-header">
+            <h2>StudyBuddy AI: Instant Academic Help 🤖</h2>
+            <p>Your 24/7 AI tutor for clarifying concepts, summarizing complex topics, and answering questions from GIOE curriculum.</p>
+        </div>
+        
+        <div class="chat-container">
+            <div class="chat-sidebar">
+                <div class="sidebar-section">
+                    <h4>⭐ Popular Topics</h4>
+                    <div class="topic-list">
+                        <a href="#"><i class="fas fa-microchip"></i> What is a PN-Junction Diode?</a>
+                        <a href="#"><i class="fas fa-wave-square"></i> Explain Time Division Multiplexing.</a>
+                        <a href="#"><i class="fas fa-route"></i> Summarize Dijkstra's Algorithm.</a>
+                        <a href="#"><i class="fas fa-wifi"></i> Core concepts of 5G Technology.</a>
+                    </div>
+                </div>
+                <div class="sidebar-section topic-history">
+                    <h4>⏱️ Recent Chats</h4>
+                    <div class="topic-list">
+                        <a href="#"><i class="fas fa-search"></i> Superheterodyne Receiver Summary</a>
+                        <a href="#"><i class="fas fa-calculator"></i> Op-Amp Basics</a>
+                        <a href="#"><i class="fas fa-code"></i> C++ Polymorphism</a>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-box">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message buddy">Hello! I'm StudyBuddy AI, your academic assistant. How can I help you with your GIOE coursework today?</div>
+                    <div class="message user">Can you give me a brief summary of the Superheterodyne Receiver?</div>
+                    <div class="message buddy">A **Superheterodyne Receiver** converts a high-frequency input signal to a fixed lower frequency (Intermediate Frequency or IF) for efficient amplification and processing. Key components include the **Local Oscillator**, **Mixer**, and **IF Amplifier**.</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" placeholder="Ask StudyBuddy AI anything..." id="chatInput">
+                    <button class="btn btn-primary chat-send-btn" onclick="alert('Sending message...')"><i class="fas fa-paper-plane"></i> Send</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4>About GIOE</h4><p>Committed to excellence in Electronics and Technology education. Fostering a new era of innovation.</p><p>Est. 1998</p></div>
+            <div class="footer-section"><h4>Quick Links</h4><a href="question-papers.html">Exam Papers</a><a href="notes.html">Lecture Notes</a><a href="free-courses.html">Online Courses</a><a href="job-openings.html">Careers</a></div>
+            <div class="footer-section"><h4>Resources</h4><a href="https://ecetrix.netlify.app">ECET Preparation</a><a href="studybuddy.html">AI Study Tool</a><a href="interview-prep.html">Interview Guides</a></div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>contact@gioe.edu</p>
+                <p>+91 1234 567 890</p>
+                <p>Main Campus, Sector 12</p>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2025 GIOE Portal. All Rights Reserved.</div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burgerMenu = document.getElementById('burgerMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            // Function to toggle the mobile menu and the burger icon
+            burgerMenu.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+                // Toggle active class for the burger menu icon animation
+                burgerMenu.classList.toggle('active'); 
+            });
+
+            // Close mobile menu when a link is clicked 
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    burgerMenu.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
