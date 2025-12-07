@@ -6,28 +6,24 @@
     <title>StudyBuddy AI - GIOE Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+    <link rel="icon" type="image/png" href="logo.jpeg" />
     <style>
-        /* Custom CSS Variables for Easy Theming (Cyber Dark Theme) */
         :root {
-            --color-dark-bg: #0d1117; /* Very Dark Blue/Black */
-            --color-primary-bg: #161b22; /* Slightly Lighter Dark Background */
-            --color-accent: #00e0ff; /* Neon Blue */
-            --color-secondary: #ff7f00; /* Cyber Orange for differentiation */
+            --color-dark-bg: #0d1117;
+            --color-primary-bg: #161b22;
+            --color-accent: #00e0ff;
+            --color-secondary: #ff7f00;
             --color-accent-hover: #00aaff;
-            --color-text-light: #e6edf3; /* Light Gray for main text */
-            --color-text-muted: #8b949e; /* Muted Gray */
-            --color-card-bg: #1f2730; /* Card Background */
+            --color-text-light: #e6edf3;
+            --color-text-muted: #8b949e;
+            --color-card-bg: #1f2730;
             --color-border: #30363d;
-            --font-heading: 'Orbitron', sans-serif; /* Tech/Sci-Fi font */
+            --font-heading: 'Orbitron', sans-serif;
             --font-body: 'Roboto', sans-serif;
-
-            /* Chat Specific Colors */
-            --color-chat-buddy: var(--color-card-bg); /* Darker bubble for AI */
-            --color-chat-user: #0088aa; /* Darker Cyan for user bubble */
+            --color-chat-buddy: var(--color-card-bg);
+            --color-chat-user: #0088aa;
         }
 
-        /* Base Reset and Global Styles */
         * {
             margin: 0;
             padding: 0;
@@ -52,14 +48,12 @@
             color: var(--color-accent-hover);
         }
 
-        /* --- Utility Classes --- */
         .content-section {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
         
-        /* Buttons */
         .btn {
             padding: 12px 25px;
             border-radius: 5px;
@@ -88,7 +82,6 @@
             transform: translateY(-2px);
         }
 
-        /* --- Header & Navigation --- */
         .navbar {
             background-color: var(--color-primary-bg);
             padding: 15px 40px;
@@ -144,7 +137,6 @@
              margin-right: 8px;
         }
 
-
         .navbar-menu a:hover,
         .navbar-menu a.active {
             color: var(--color-accent);
@@ -166,7 +158,6 @@
             width: 100%;
         }
 
-        /* Mobile Menu Setup */
         .burger-menu {
             display: none;
             cursor: pointer;
@@ -221,8 +212,6 @@
             background-color: rgba(0, 224, 255, 0.05);
         }
 
-
-        /* --- Page Title Header --- */
         .page-title-header {
             text-align: center;
             padding: 50px 0 30px;
@@ -250,8 +239,6 @@
             color: var(--color-text-muted);
         }
         
-        /* --- STUDYBUDDY AI CHAT STYLES --- */
-        
         #studybuddy-page {
             padding: 20px 0;
         }
@@ -261,15 +248,14 @@
             grid-template-columns: 280px 1fr;
             max-width: 1200px;
             margin: 0 auto;
-            height: 75vh; /* Increased height for better visibility */
+            height: 75vh;
             border: 1px solid var(--color-border);
             border-radius: 12px;
             overflow: hidden;
             background-color: var(--color-primary-bg);
-            box-shadow: 0 0 30px rgba(0, 224, 255, 0.15); /* Neon glow effect */
+            box-shadow: 0 0 30px rgba(0, 224, 255, 0.15);
         }
 
-        /* Chat Sidebar */
         .chat-sidebar {
             background-color: var(--color-card-bg);
             padding: 20px;
@@ -283,7 +269,7 @@
 
         .chat-sidebar h4 {
             font-family: var(--font-heading);
-            color: var(--color-secondary); /* Use orange for high emphasis on side titles */
+            color: var(--color-secondary);
             margin-bottom: 15px;
             font-size: 1.1em;
             border-bottom: 1px dashed var(--color-border);
@@ -305,7 +291,6 @@
             font-weight: 500;
         }
         
-        /* Chat Box & Messages */
         .chat-box {
             display: flex;
             flex-direction: column;
@@ -328,6 +313,7 @@
             line-height: 1.5;
             font-size: 0.95em;
             filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+            white-space: pre-wrap;
         }
 
         .buddy {
@@ -338,7 +324,6 @@
             color: var(--color-text-light);
         }
         
-        /* Highlight bold text in buddy messages */
         .buddy strong {
             color: var(--color-accent);
             font-weight: 600;
@@ -352,7 +337,6 @@
             border-top-right-radius: 4px;
         }
 
-        /* Chat Input Area */
         .chat-input-area {
             display: flex;
             padding: 15px 20px;
@@ -387,8 +371,7 @@
             border-radius: 8px;
             min-width: 100px;
         }
-        
-        /* --- Footer --- */
+
         .footer {
             background-color: var(--color-primary-bg);
             padding: 50px 20px 20px;
@@ -426,7 +409,6 @@
             transform: translateX(5px);
         }
         
-        /* Adding icons to contact p tags in footer */
         .footer-section p:nth-child(2)::before {
             content: "\f0e0"; 
             font-family: "Font Awesome 6 Free";
@@ -458,7 +440,6 @@
             color: var(--color-text-muted);
         }
 
-        /* --- Responsive Design --- */
         @media (max-width: 992px) {
             .navbar-menu {
                 display: none;
@@ -480,7 +461,7 @@
             }
 
             .chat-sidebar {
-                display: none; /* Hide sidebar on small screens */
+                display: none;
             }
 
             .chat-messages {
@@ -499,29 +480,68 @@
                 grid-template-columns: 1fr;
             }
         }
-    </style>
+    
+    /* Prevent footer overlap */
+html, body {
+    height: 100%;
+}
+
+main {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Fix chat height */
+.chat-container {
+    min-height: 75vh;
+    height: auto;
+}
+
+/* Ensure messages scroll without collapsing */
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+</style>
 </head>
 <body>
     <nav class="navbar">
         <a href="index.html" class="navbar-logo">GIOE Portal</a>
         <ul class="navbar-menu">
             <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
             <li><a href="question-papers.html"><i class="fas fa-file-alt"></i> Papers</a></li>
             <li><a href="notes.html"><i class="fas fa-book"></i> Notes</a></li>
             <li><a href="free-courses.html"><i class="fas fa-graduation-cap"></i> Courses</a></li>
             <li><a href="job-openings.html"><i class="fas fa-briefcase"></i> Jobs</a></li>
             <li><a href="https://ecetrix.netlify.app"><i class="fas fa-rocket"></i> ECETRIX</a></li>
-            <li><a href="studybuddy.html" class="active"><i class="fas fa-brain"></i> StudyBuddy AI</a></li> </ul>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+        </ul>
         <div class="burger-menu" id="burgerMenu">
             <div class="burger-line"></div>
             <div class="burger-line"></div>
             <div class="burger-line"></div>
         </div>
     </nav>
+
     <div class="mobile-menu" id="mobileMenu">
         <a href="index.html"><i class="fas fa-home"></i> Home</a>
-        <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
         <a href="question-papers.html"><i class="fas fa-file-alt"></i> Question Papers</a>
         <a href="notes.html"><i class="fas fa-book"></i> Notes</a>
         <a href="free-courses.html"><i class="fas fa-graduation-cap"></i> Free Courses</a>
@@ -530,43 +550,57 @@
         <a href="studybuddy.html" class="active"><i class="fas fa-brain"></i> StudyBuddy AI</a>
         <a href="interview-prep.html"><i class="fas fa-clipboard-list"></i> Interview Prep</a>
         <a href="https://cv-generator-v1.netlify.app/"><i class="fas fa-file-invoice"></i> CV Generator</a>
+        <a href="about.html"><i class="fas fa-info-circle"></i> About Us</a>
     </div>
 
     <main class="content-section" id="studybuddy-page">
         <div class="page-title-header">
-            <h2>StudyBuddy AI: Instant Academic Help 🤖</h2>
-            <p>Your 24/7 AI tutor for clarifying concepts, summarizing complex topics, and answering questions from GIOE curriculum.</p>
+            <h2>StudyBuddy AI: Learn With Analogies 🤖</h2>
+            <p>Ask any topic from GIOE syllabus (or beyond) and get explanations using real-life analogies, simple breakdowns, and exam-ready points.</p>
         </div>
         
         <div class="chat-container">
             <div class="chat-sidebar">
                 <div class="sidebar-section">
-                    <h4>⭐ Popular Topics</h4>
+                    <h4>⭐ Try asking</h4>
                     <div class="topic-list">
-                        <a href="#"><i class="fas fa-microchip"></i> What is a PN-Junction Diode?</a>
-                        <a href="#"><i class="fas fa-wave-square"></i> Explain Time Division Multiplexing.</a>
-                        <a href="#"><i class="fas fa-route"></i> Summarize Dijkstra's Algorithm.</a>
-                        <a href="#"><i class="fas fa-wifi"></i> Core concepts of 5G Technology.</a>
+                        <a href="#" data-question="Explain PN-Junction Diode using a real-life analogy and then give exam points."><i class="fas fa-microchip"></i> PN Junction with analogy</a>
+                        <a href="#" data-question="Explain Time Division Multiplexing like I am 15 years old, using analogies and exam points."><i class="fas fa-wave-square"></i> TDM like I'm 15</a>
+                        <a href="#" data-question="Explain Dijkstra's Algorithm using a city roads analogy and then 5-mark style points."><i class="fas fa-route"></i> Dijkstra with roads analogy</a>
+                        <a href="#" data-question="Explain 5G Technology with a simple real-world comparison and then important exam points."><i class="fas fa-wifi"></i> 5G vs 4G analogy</a>
                     </div>
                 </div>
                 <div class="sidebar-section topic-history">
-                    <h4>⏱️ Recent Chats</h4>
+                    <h4>⏱️ How to use</h4>
                     <div class="topic-list">
-                        <a href="#"><i class="fas fa-search"></i> Superheterodyne Receiver Summary</a>
-                        <a href="#"><i class="fas fa-calculator"></i> Op-Amp Basics</a>
-                        <a href="#"><i class="fas fa-code"></i> C++ Polymorphism</a>
+                        <p style="color: var(--color-text-muted); font-size: 0.9em;">
+                            • Add “with analogy” to any topic.<br>
+                            • Ask for marks: “Give 5 marks answer.”<br>
+                            • For revision: “Summarize in 5 bullet points.”
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="chat-box">
                 <div class="chat-messages" id="chatMessages">
-                    <div class="message buddy">Hello! I'm StudyBuddy AI, your academic assistant. How can I help you with your GIOE coursework today?</div>
-                    <div class="message user">Can you give me a brief summary of the Superheterodyne Receiver?</div>
-                    <div class="message buddy">A **Superheterodyne Receiver** converts a high-frequency input signal to a fixed lower frequency (Intermediate Frequency or IF) for efficient amplification and processing. Key components include the **Local Oscillator**, **Mixer**, and **IF Amplifier**.</div>
+                    <div class="message buddy">
+                        Hey, I'm <strong>StudyBuddy AI</strong>.<br><br>
+                        I always answer in this order:<br>
+                        1) A simple <strong>real-life analogy</strong><br>
+                        2) A clear <strong>concept explanation</strong><br>
+                        3) <strong>Exam-ready bullet points</strong> (2/3/5 marks style)<br>
+                        4) A short <strong>quick revision</strong> line<br><br>
+                        Ask me anything like:<br>
+                        • “Explain flip-flop using a day-to-day example.”<br>
+                        • “Teach me OSI model with analogies.”<br>
+                        • “Give 5-mark answer for Superheterodyne Receiver.”
+                    </div>
                 </div>
                 <div class="chat-input-area">
-                    <input type="text" placeholder="Ask StudyBuddy AI anything..." id="chatInput">
-                    <button class="btn btn-primary chat-send-btn" onclick="alert('Sending message...')"><i class="fas fa-paper-plane"></i> Send</button>
+                    <input type="text" placeholder="Ask StudyBuddy AI anything... (e.g. Explain transistor as an analogy)" id="chatInput">
+                    <button class="btn btn-primary chat-send-btn" id="sendBtn">
+                        <i class="fas fa-paper-plane"></i> Send
+                    </button>
                 </div>
             </div>
         </div>
@@ -574,37 +608,189 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section"><h4>About GIOE</h4><p>Committed to excellence in Electronics and Technology education. Fostering a new era of innovation.</p><p>Est. 1998</p></div>
-            <div class="footer-section"><h4>Quick Links</h4><a href="question-papers.html">Exam Papers</a><a href="notes.html">Lecture Notes</a><a href="free-courses.html">Online Courses</a><a href="job-openings.html">Careers</a></div>
-            <div class="footer-section"><h4>Resources</h4><a href="https://ecetrix.netlify.app">ECET Preparation</a><a href="studybuddy.html">AI Study Tool</a><a href="interview-prep.html">Interview Guides</a></div>
             <div class="footer-section">
-                <h4>Contact</h4>
-                <p>contact@gioe.edu</p>
-                <p>+91 1234 567 890</p>
-                <p>Main Campus, Sector 12</p>
+                <h4>About GIOE</h4>
+                <p>Committed to excellence in Electronics and Technology education. Fostering a new era of innovation.</p>
+                <p>Est. 1981</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="question-papers.html">Exam Papers</a>
+                <a href="notes.html">Lecture Notes</a>
+                <a href="free-courses.html">Online Courses</a>
+                <a href="job-openings.html">Careers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="https://ecetrix.netlify.app">ECET Preparation</a>
+                <a href="studybuddy.html">AI Study Tool</a>
+                <a href="interview-prep.html">Interview Guides</a>
+            </div>
+            <div class="footer-section">
+                <p><i class="fas fa-envelope"></i> 054.gioe@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> GIOE, East Marredpally, Secunderabad</p>
             </div>
         </div>
         <div class="footer-bottom">&copy; 2025 GIOE Portal. All Rights Reserved.</div>
     </footer>
 
     <script>
+        // WARNING:
+        // Never commit or deploy a real key in frontend code.
+        // Use this only in a private/local environment.
+        const OPENAI_API_KEY = "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";
+
+        const STUDYBUDDY_SYSTEM_PROMPT = `
+You are StudyBuddy AI, an academic tutor for diploma students at GIOE.
+
+Your persona:
+- You speak like a friendly senior helping a junior.
+- You are clear, structured, and slightly casual but respectful.
+- You focus on understanding first, then exam scoring.
+
+For EVERY answer, follow this format in order:
+
+1) Analogy:
+   - Start with: "Analogy:" on a new line.
+   - Use a simple real-life comparison (traffic, water flow, classrooms, etc.).
+   - Keep it 2–4 sentences.
+
+2) Concept Explanation:
+   - Start with: "Concept:" on a new line.
+   - Explain the actual theory clearly but in simple words.
+   - Avoid unnecessary jargon, unless needed for exams.
+
+3) Exam Points:
+   - Start with: "Exam Points:" on a new line.
+   - Give bullet points in 2/3/5 marks style depending on how big the topic feels.
+   - Each point should be crisp, syllabus-friendly, and writeable in answer sheet.
+
+4) Quick Revision:
+   - Start with: "Quick Revision:" on a new line.
+   - 1–2 line summary to remember before exam.
+
+If the user mentions marks like "2 marks / 3 marks / 5 marks", adjust the depth accordingly.
+If the user asks to simplify more, go even more basic in the analogy.
+        `.trim();
+
         document.addEventListener('DOMContentLoaded', () => {
+            /* NAV: Burger menu */
             const burgerMenu = document.getElementById('burgerMenu');
             const mobileMenu = document.getElementById('mobileMenu');
 
-            // Function to toggle the mobile menu and the burger icon
             burgerMenu.addEventListener('click', () => {
                 mobileMenu.classList.toggle('open');
-                // Toggle active class for the burger menu icon animation
                 burgerMenu.classList.toggle('active'); 
             });
 
-            // Close mobile menu when a link is clicked 
             const mobileLinks = mobileMenu.querySelectorAll('a');
             mobileLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.remove('open');
                     burgerMenu.classList.remove('active');
+                });
+            });
+
+            /* CHAT: Core logic */
+            const chatMessages = document.getElementById('chatMessages');
+            const chatInput = document.getElementById('chatInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const topicLinks = document.querySelectorAll('.topic-list a[data-question]');
+
+            // Minimal chat history for context
+            const chatHistory = [];
+
+            function appendMessage(text, sender) {
+                const msg = document.createElement('div');
+                msg.classList.add('message', sender === 'user' ? 'user' : 'buddy');
+                msg.textContent = text;
+                chatMessages.appendChild(msg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function appendThinkingBubble() {
+                const msg = document.createElement('div');
+                msg.classList.add('message', 'buddy');
+                msg.setAttribute('id', 'thinking-bubble');
+                msg.textContent = 'Thinking with analogies...';
+                chatMessages.appendChild(msg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function removeThinkingBubble() {
+                const bubble = document.getElementById('thinking-bubble');
+                if (bubble) bubble.remove();
+            }
+
+            async function callOpenAI(message, history) {
+                const messages = [
+                    { role: "system", content: STUDYBUDDY_SYSTEM_PROMPT },
+                    ...history,
+                    { role: "user", content: message }
+                ];
+
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + OPENAI_API_KEY
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4.1-mini", // adjust if needed
+                        messages: messages,
+                        temperature: 0.7,
+                        max_tokens: 600
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text().catch(() => "");
+                    throw new Error("OpenAI API error: " + response.status + " " + errorText);
+                }
+
+                const data = await response.json();
+                const reply = data.choices?.[0]?.message?.content?.trim() || "No response generated.";
+                return reply;
+            }
+
+            async function sendMessage() {
+                const text = chatInput.value.trim();
+                if (!text) return;
+
+                appendMessage(text, 'user');
+                chatHistory.push({ role: 'user', content: text });
+                chatInput.value = '';
+
+                appendThinkingBubble();
+
+                try {
+                    const reply = await callOpenAI(text, chatHistory.slice(-8));
+                    removeThinkingBubble();
+                    appendMessage(reply, 'buddy');
+                    chatHistory.push({ role: 'assistant', content: reply });
+                } catch (err) {
+                    console.error(err);
+                    removeThinkingBubble();
+                    appendMessage('Error talking to StudyBuddy AI. Check your API key or network and try again.', 'buddy');
+                }
+            }
+
+            sendBtn.addEventListener('click', sendMessage);
+
+            chatInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // Sidebar quick prompts
+            topicLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const question = link.getAttribute('data-question');
+                    chatInput.value = question;
+                    chatInput.focus();
                 });
             });
         });
