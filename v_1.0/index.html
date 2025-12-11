@@ -363,6 +363,73 @@
         .card-meta i {
             margin-left: 5px;
         }
+        
+        /* --- CONTACT FORM STYLES (NEW) --- */
+        .contact-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0, 224, 255, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--color-text-light);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--color-dark-bg);
+            border: 2px solid var(--color-border);
+            border-radius: 4px;
+            color: var(--color-text-light);
+            font-family: var(--font-body);
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+            outline: none;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            /* Reusing .btn-primary styling */
+            background-color: var(--color-accent);
+            color: var(--color-dark-bg);
+            border: 2px solid var(--color-accent);
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-size: 1.1em;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--color-accent-hover);
+            box-shadow: 0 0 15px var(--color-accent);
+            transform: translateY(-2px);
+        }
+
 
         /* --- Footer --- */
         .footer {
@@ -466,6 +533,10 @@
             .footer-content {
                 grid-template-columns: 1fr;
             }
+            
+            .contact-container {
+                padding: 30px 20px;
+            }
         }
     </style>
     </head>
@@ -554,7 +625,39 @@
                 <div class="card-meta">Create Your CV <i class="fas fa-arrow-right"></i></div>
             </a>
         </div>
-    </main>
+        
+        <div class="page-title-header">
+            <h2>Get in Touch <i class="fas fa-headset" style="color: var(--color-accent);"></i></h2>
+            <p>Have a suggestion, report an issue, or need help? Send us a message.</p>
+        </div>
+
+        <div class="contact-container">
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="d57b14b8-a4c1-49e2-9753-3a448e1f91e2">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Your Name</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Your Email</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="your.email@gioe.in" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject"><i class="fas fa-tag"></i> Subject / Purpose</label>
+                    <input type="text" id="subject" name="subject" class="form-control" placeholder="e.g., Paper Request, Bug Report, Partnership" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message"><i class="fas fa-comment-alt"></i> Your Message</label>
+                    <textarea id="message" name="message" rows="5" class="form-control" placeholder="Type your message here..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Encrypted Transmission</button>
+            </form>
+        </div>
+        </main>
 
     <footer class="footer">
         <div class="footer-content">
@@ -607,6 +710,8 @@
                     burgerMenu.classList.remove('active');
                 });
             });
+            
+            // NOTE: Add form submission logic (e.g., using fetch to a form endpoint) here if needed.
         });
     </script>
     </body>
